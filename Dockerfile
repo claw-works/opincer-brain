@@ -7,6 +7,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     antiword \
     && rm -rf /var/lib/apt/lists/*
 
+# Use Aliyun pip mirror for faster downloads in China
+RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+    && pip config set global.trusted-host mirrors.aliyun.com
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
