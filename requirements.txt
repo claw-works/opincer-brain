@@ -8,3 +8,6 @@ openpyxl==3.1.5
 python-pptx==1.0.2
 beautifulsoup4==4.13.4
 chardet==5.2.0
+paddleocr==2.9.1
+paddlepaddle==3.0.0
+pdf2image==1.17.0

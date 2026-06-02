@@ -2,9 +2,12 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install system dependencies for document parsing
+# Install system dependencies for document parsing and OCR
 RUN apt-get update && apt-get install -y --no-install-recommends \
     antiword \
+    poppler-utils \
+    libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Use Aliyun pip mirror for faster downloads in China
