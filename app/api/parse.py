@@ -25,6 +25,7 @@ class ParseResult(BaseModel):
     text: str
     pages: int = 0
     metadata: dict = {}
+    output_format: str = "markdown"  # "markdown" | "text"
 
 
 @router.post("", response_model=ParseResult)
@@ -37,7 +38,12 @@ async def parse_by_url(req: ParseByURLRequest):
 
     data = await _download(req.file_url)
     result = parser.parse(data, req.file_name)
-    return ParseResult(**result)
+    return ParseResult(
+        text=result["text"],
+        pages=result.get("pages", 0),
+        metadata=result.get("metadata", {}),
+        output_format=result.get("metadata", {}).get("output_format", "text"),
+    )
 
 
 @router.post("/upload", response_model=ParseResult)
@@ -56,7 +62,12 @@ async def parse_by_upload(
     if len(data) > MAX_FILE_SIZE:
         raise HTTPException(413, f"文件过大，上限 {MAX_FILE_SIZE // (1024*1024)}MB")
     result = parser.parse(data, name)
-    return ParseResult(**result)
+    return ParseResult(
+        text=result["text"],
+        pages=result.get("pages", 0),
+        metadata=result.get("metadata", {}),
+        output_format=result.get("metadata", {}).get("output_format", "text"),
+    )
 
 
 def _get_ext(filename: str) -> str:
