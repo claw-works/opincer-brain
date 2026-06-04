@@ -1,0 +1,6 @@
+# Optional OCR dependencies for scanned PDFs.
+# Install on top of requirements.txt:
+#   pip install -r requirements-ocr.txt
+# These add ~1GB to the image (PaddlePaddle + opencv + scikit-image + scipy).
+paddleocr==2.9.1
+paddlepaddle==3.0.0
