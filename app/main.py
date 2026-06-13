@@ -1,7 +1,7 @@
 """opincer-brain — Opincer 平台 AI/NLP 能力服务"""
 
 from fastapi import FastAPI
-from app.api import parse, chunk
+from app.api import parse, chunk, embed
 
 app = FastAPI(
     title="opincer-brain",
@@ -11,6 +11,7 @@ app = FastAPI(
 
 app.include_router(parse.router, prefix="/parse", tags=["parse"])
 app.include_router(chunk.router, prefix="/chunk", tags=["chunk"])
+app.include_router(embed.router, prefix="/embed", tags=["embed"])
 
 
 @app.get("/health")

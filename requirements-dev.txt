@@ -1,0 +1,5 @@
+# 开发/测试依赖（不随生产镜像安装）。
+# 运行：python -m pytest tests -q
+-r requirements.txt
+pytest==9.0.3
+hypothesis==6.155.2
